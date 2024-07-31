@@ -1,0 +1,158 @@
+<mat-card class="mb-25 tagus-card">
+    <mat-card-header>
+        <h4 class="mb-0">TICKET CHECKER</h4>
+    </mat-card-header>
+    <mat-card-content>
+        <form [formGroup]="ticketNumber" class="tagus-search-box">
+            <input formControlName="id" type="number" class="input-search" placeholder="Enter your ticket number">
+            <button mat-flat-button class="tagus" [disabled]="!ticketNumber.valid || isLoading" (click)="onSubmit()">
+                <span class="d-flex" *ngIf="isLoading">searching...<mat-spinner diameter="20"></mat-spinner></span>
+                <span *ngIf="!isLoading">Search</span>
+            </button>
+        </form>
+
+        <div class="row" *ngIf="ticketData">
+            <div class="col-md-6 col-lg-6 col-sm-12">
+                <mat-card class="mb-25 tagus-card mt-20">
+                    <mat-card-header class="border-bottom">
+                        <h5 class="mb-0">Timeline</h5>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <ul class="ps-0 mb-0 mt-0 list-unstyled tagus-timeline">
+                            <li class="position-relative">
+                                <img src="assets/img/icon/right-arrow.png" alt="right-arrow" class="icon">
+                                <h5 class="mb-12">Sent</h5>
+                                <span class="d-block muted-color mb-12 fs-14">{{ ticketData?.created_time?.display_value }}</span>
+                                <p>Your query was sent to customer support.</p>
+                            </li>
+                            <li class="position-relative">
+                                <img src="assets/img/icon/right-arrow.png" alt="right-arrow" class="icon">
+                                <h5 class="mb-12">Received</h5>
+                                <span class="d-block muted-color mb-12 fs-14">{{ ticketData?.created_time?.display_value }}</span>
+                                <p>Query was received</p>
+                            </li>
+                            <li class="position-relative">
+                                <img src="assets/img/icon/right-arrow.png" alt="right-arrow" class="icon">
+                                <h5 class="mb-12">Assigned</h5>
+                                <span class="d-block muted-color mb-12 fs-14">{{ ticketData?.created_time?.display_value }}</span>
+                                <p>Your issue has been assign to one of our support Agents.</p>
+
+                            </li>
+                            <li class="position-relative">
+                                <img src="assets/img/icon/right-arrow.png" alt="right-arrow" class="icon">
+                                <h5 class="mb-12">Processing</h5>
+                                <span class="d-block muted-color mb-12 fs-14">{{ ticketData?.created_time?.display_value }}</span>
+                                <p>Your query is being processed</p>
+                            </li>
+
+                            <li class="position-relative">
+                                <img src="assets/img/icon/right-arrow.png" alt="right-arrow" class="icon">
+                                <h5 class="mb-12">{{ ticketData?.status?.name }}</h5>
+                                <span class="d-block muted-color mb-12 fs-14">{{ ticketData?.created_time?.display_value }}</span>
+                                <p>current status.</p>
+
+                            </li>
+                        </ul>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+
+            <ng-template [ngIf]="!(ticketData.email_to.length > 0)">
+                <div class="col-md-6 col-lg-6 col-sm-12">
+                    <mat-card class="mb-25 tagus-card mt-20 mb-50">
+                        <mat-card-header>
+                            <h5 class="mb-0">Tichet number <strong>{{ticketData?.id}}</strong></h5>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <form>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6">
+                                        <div class="tagus-form-group">
+                                            <label class="d-block mb-12 fw-semibold gray-color">Company Name<span>*</span></label>
+                                            <mat-form-field appearance="fill">
+                                                <i class="ri-home-office-line"></i>
+                                                <mat-label>Enter Company Name</mat-label>
+                                                <input matInput [value]="ticketData?.udf_fields?.udf_sline_301" disabled>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6">
+                                        <div class="tagus-form-group">
+                                            <label class="d-block mb-12 fw-semibold gray-color">Category</label>
+                                            <mat-form-field appearance="fill">
+                                                <i class="ri-list-unordered"></i>
+                                                <mat-label>Enter Company Name</mat-label>
+                                                <input matInput [value]="ticketData?.category?.name" disabled>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6 col-md-6 col-sm-6">
+                                        <div class="tagus-form-group">
+                                            <label class="d-block mb-12 fw-semibold gray-color">Email Address <span>*</span></label>
+                                            <mat-form-field appearance="fill">
+                                                <i class="ri-mail-line"></i>
+                                                <mat-label>Enter email address</mat-label>
+                                                <input matInput [value]="ticketData?.udf_fields?.udf_sline_307" disabled>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6">
+                                        <div class="tagus-form-group">
+                                            <label class="d-block mb-12 fw-semibold gray-color">Phone</label>
+                                            <mat-form-field appearance="fill">
+                                                <i class="ri-phone-line"></i>
+                                                <mat-label>Enter phone number</mat-label>
+                                                <input matInput [value]="ticketData.udf_fields?.udf_long_306" disabled>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                        <div class="tagus-form-group">
+                                            <label class="d-block mb-12 fw-semibold gray-color">Description</label>
+                                            <mat-form-field appearance="fill">
+                                                <i class="ri-information-line"></i>
+                                                <mat-label>Some description text...</mat-label>
+                                                <textarea matInput rows="6"  [value]="ticketData?.description" disabled></textarea>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <br><br><br><br><br><br><br><br><br><br>
+                        </mat-card-content>
+                    </mat-card>
+
+                </div>
+            </ng-template>
+            <ng-template [ngIf]="(ticketData.email_to.length > 0)">
+                <div class="col-md-6 col-lg-6 col-sm-12" >
+                    <mat-card class="mb-25 tagus-card mt-20 mb-50">
+                        <mat-card-content>
+                            <div class="row mb-20">
+                                <h6> From: <span>{{ticketData.requester.name}}</span></h6>
+                            </div>
+                            <div class="row mb-20">
+                                <h6> Email: <span>{{ticketData.requester.email_id}}</span></h6>
+                            </div>
+                            <p [innerHTML]="ticketData.description"></p>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </ng-template>
+        </div>
+        <mat-card class="profile-card-box tagus-card mb-25 mt-20" *ngIf="isError">
+            <div class="d-md-flex align-items-center justify-content-space-between">
+                <div class="profile-box">
+                    <img src="assets/img/warning.png" height="60" width="60" class="rounded-circle mb-15" alt="user">
+                    <h5 class="fw-semibold">Ticket not found!</h5>
+                    <span class="d-block gray-color"> invalid / expired ticket number</span>
+                </div>
+                <div class="impression-box text-center">
+
+                </div>
+            </div>
+        </mat-card>
+    </mat-card-content>
+</mat-card>

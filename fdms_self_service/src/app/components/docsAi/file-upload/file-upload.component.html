@@ -1,0 +1,95 @@
+
+<mat-card class="mb-25 tagus-card">
+    <mat-card-header>
+        <h4>Upload to Cloud</h4>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-horizontal-stepper #stepper [linear]="true">
+
+       
+
+            <mat-step [completed]="false" label="Upload Invoice">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                        <mat-card class="mb-25 tagus-card">
+                            <mat-card-header>
+                                <h5 class="mb-0">Invoice File Uploader <br/></h5>
+                                <mat-checkbox class="mt-0 "  [(ngModel)]="invoiceNumberPos" >Invoice Number Format <br/> (Select if "Doc No" and the actual # are not in the same line)</mat-checkbox>
+                                <p class="ms-10">Doc No.<br/>INV00233</p>
+
+                            
+
+                            </mat-card-header>
+                          
+                                                         <mat-card-content>
+                              
+                     
+                                    <ngx-dropzone (change)="onFileSelected($event, 'invoice')" [disabled]="loading">
+                                        <ngx-dropzone-label class="fw-semibold">Drop PDF files here or click to upload.<br/> N.B Upload an invoice that has the first line with a vatable product</ngx-dropzone-label>
+                                        
+                                        <ngx-dropzone-preview *ngFor="let f of invoiceFiles" multiple="false" [removable]="true" (removed)="onRemove(f, 'invoice')">
+                                            <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                                        </ngx-dropzone-preview>
+                                    </ngx-dropzone>
+                                <mat-progress-bar class="mt-10" mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                </div>
+                <div class="text-center">
+                  <button  mat-flat-button matStepperPrevious class="tagus ms-5 mt-20" >Back</button>
+
+                  <button  mat-flat-button matStepperNext class="tagus ms-5 mt-20" (click)="setCompleteStatus(stepper)">Next</button>
+
+                </div>
+              
+            </mat-step>
+            <mat-step [completed]="false" label="Credit Note">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                        <mat-card class="mb-25 tagu
+                        s-card">
+                            <mat-card-header>
+                                <h5 class="mb-0">Credit Note File Uploader<br/></h5>
+                                <mat-checkbox class="mt-0"   [(ngModel)]="invoiceNumberPos" >Credit Number Format <br/> (Select if "Credit No." and the actual # are not in the same line)</mat-checkbox>
+                                <p class="ms-10">Credit No.<br/>CR00233</p>
+
+                            </mat-card-header>
+                            <mat-card-content>
+                                <ngx-dropzone (change)="onFileSelected($event, 'creditNote')" [disabled]="loading">
+                                  <ngx-dropzone-label class="fw-semibold">Drop PDF files here or click to upload.<br/> N.B Upload an invoice that has the first line with a vatable product</ngx-dropzone-label>
+
+                                    <ngx-dropzone-preview *ngFor="let f of creditNoteFiles" multiple="false" [removable]="true" (removed)="onRemove(f, 'creditNote')">
+                                        <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                                    </ngx-dropzone-preview>
+                                </ngx-dropzone>
+                                <mat-progress-bar class="mt-10" mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                </div>
+                <div class="text-center">
+
+
+                <button mat-flat-button matStepperNext class="tagus ms-5 mt-20" (click)="setCompleteStatus(stepper)">Next</button>
+</div>
+            </mat-step>
+
+            <mat-step label="Response">
+              <div class="row">
+                <div class="text-center color-success">
+                  <h2>Your upload was successfully!</h2>
+                    <p></p>
+                </div>
+                
+              </div>
+
+                  
+                  
+<!--                <button [disabled]="!capturedFields.creditNote" mat-flat-button matStepperNext class="tagus ms-5 mt-20">Next</button>-->
+
+            </mat-step>
+
+        </mat-horizontal-stepper>
+    </mat-card-content>
+</mat-card>

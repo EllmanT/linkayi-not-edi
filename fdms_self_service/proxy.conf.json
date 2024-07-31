@@ -1,0 +1,6 @@
+{
+    "/api": {
+        "target": "https://revmax.co.zw/api/v3/requests",
+        "secure": false
+    }
+}

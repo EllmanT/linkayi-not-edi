@@ -1,0 +1,40 @@
+.mat-mdc-form-field {
+    margin-top: 15px;
+}
+.example-stepper {
+    margin-top: 10px;
+}
+
+/* Basic button styles for updateButton class */
+.updateButton {
+    display: inline-block;
+    padding: 8px 16px;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: 2px solid #3498db;
+    color: #3498db;
+    background-color: #fff;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+.alert {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Hover effect */
+.updateButton:hover {
+    background-color: #3498db;
+    color: #fff;
+}
+
+/* Active (pressed) state */
+.updateButton:active {
+    border-color: #2980b9;
+    background-color: #2980b9;
+    color: #fff;
+}
+

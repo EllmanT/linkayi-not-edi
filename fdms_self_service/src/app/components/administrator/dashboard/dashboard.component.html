@@ -1,0 +1,260 @@
+<ng-container *ngIf="loadingData">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</ng-container>
+<div class="row">
+    <div class="col-sm-4 col-md-4 col-lg-4">
+        <mat-card (click)="navigateToClientTransactions()" class="single-stats-box tagus-card mb-25">
+            <div class="d-flex justify-content-space-between align-items-center">
+                <div class="icon text-bg icon-large">
+                    <i class="ri-cloud-windy-line"></i>
+                </div>
+                <div class="title text-center">
+                    <h2 class="">Invoices 788</h2>
+<!--               -linepan class="d-block gray-color">Check Ticket</span>-->
+                </div>
+            </div>
+            <div class="mb-12 info d-flex justify-content-space-between  tet-end">
+                <span class="d-block  fw-semibold">Total Invoices on cloud</span>
+            </div>
+            <mat-progress-bar value="75" mode="determinate" color="accent"></mat-progress-bar>
+        </mat-card>
+
+    </div>
+    <div class="col-sm-4 col-md-4 col-lg-4">
+        <mat-card (click)="navigateToClientSuppliers()" class="single-stats-box tagus-card mb-25">
+            <div class="d-flex justify-content-space-between align-items-center">
+                <div class="icon text-bg">
+                    <i class="ri-group-line"></i>
+                </div>
+                <div class="title text-end">
+                    <h2 class=""> Suppliers 24</h2>
+<!--                    <span class="d-block gray-color">Check Ticket</span>-->
+                </div>
+            </div>
+            <div class="mb-12 info d-flex justify-content-space-between align-items-center">
+                <span class="d-block  fw-semibold text-end">View Supplier Invoices</span>
+            </div>
+            <mat-progress-bar value="75" mode="determinate" color="warn"></mat-progress-bar>
+        </mat-card>
+
+    </div>
+    <div class="col-sm-4 col-md-4 col-lg-4">
+        <mat-card (click)="navigateToClientBuyers()" class="single-stats-box tagus-card mb-25">
+            <div class="d-flex justify-content-space-between align-items-center">
+                <div class="icon text-bg-success">
+                    <i class="ri-ticket-2-fill"></i>
+                </div>
+                <div class="title text-end">
+                    <h2 class=""> Buyers  87</h2>
+<!--                    <span class="d-block gray-color">Check Ticket</span>-->
+                </div>
+            </div>
+            <div class="mb-12 info d-flex justify-content-space-between align-items-center">
+                <span class="d-block  fw-semibold">View buyer invoices</span>
+            </div>
+            <mat-progress-bar value="75" mode="determinate"></mat-progress-bar>
+        </mat-card>
+
+    </div>
+<div class="row">
+    <div class="col-lg-6 col-md-6">
+        <mat-card class="mb-25 tagus-card">
+            <mat-card-header class="border-bottom">
+                <h5 class="mb-0">Latest Transactions</h5>
+            </mat-card-header>
+            <!-- <mat-card-content>
+                <mat-accordion class="tagus-advance-expansion">
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                What does it take to be validated by Zimra?
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <p>Valid invoice that can be validated on Zimra Portal
+                            Valid credit note that can be validated on Zimra Portal
+                            Valid debits note that can be validated on Zimra Portal
+                            .</p>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                How long does it take to be validated?
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <p>The validation will depend on the completion of the criteria provided. As soon as all met criteria are provided and sample invoices submitted to Zimra, Zimra will provide the green light to go into production.</p>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                What does Zimra use for VAT Claims?
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <p>Only the production invoices are used for VAT claims. The client and service provider need to ensure they push the client to go into production.
+                            Kindly note that FDMS test invoices are strictly for testing purposes.
+                        </p>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                What happens after Zimra provides a green light into production?
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <p>Zimra will issue a new client with a production certificate. The Axis Solutions team will do an installation for the client.</p>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Which accounting software’s & operating system is compatible with the new Zimra system?
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <p>All accounting software systems with an exception on how flexible they are. Windows 10 0r 11 Professional and enterprise.</p>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Revmax device prices (for new device, reinstallation, and annual license fee)
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <p>New device $ 595 , Replacement $ 410 ,Reinstallation $ 60 ,Annual license Fee $ 185 ,Templates training $ 150.</p>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </mat-card-content> -->
+        </mat-card>
+    </div>
+
+    <div class="col-lg-6 col-md-6">
+        <mat-card class="mb-25 tagus-card">
+            <mat-card-header class="border-bottom">
+                <h5 class="mb-0">Analysis</h5>
+            </mat-card-header>
+            <!-- <mat-card-content>
+                <mat-accordion class="tagus-advance-expansion">
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                What does it take to be validated by Zimra?
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <p>Valid invoice that can be validated on Zimra Portal
+                            Valid credit note that can be validated on Zimra Portal
+                            Valid debits note that can be validated on Zimra Portal
+                            .</p>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                How long does it take to be validated?
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <p>The validation will depend on the completion of the criteria provided. As soon as all met criteria are provided and sample invoices submitted to Zimra, Zimra will provide the green light to go into production.</p>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                What does Zimra use for VAT Claims?
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <p>Only the production invoices are used for VAT claims. The client and service provider need to ensure they push the client to go into production.
+                            Kindly note that FDMS test invoices are strictly for testing purposes.
+                        </p>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                What happens after Zimra provides a green light into production?
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <p>Zimra will issue a new client with a production certificate. The Axis Solutions team will do an installation for the client.</p>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Which accounting software’s & operating system is compatible with the new Zimra system?
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <p>All accounting software systems with an exception on how flexible they are. Windows 10 0r 11 Professional and enterprise.</p>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Revmax device prices (for new device, reinstallation, and annual license fee)
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <p>New device $ 595 , Replacement $ 410 ,Reinstallation $ 60 ,Annual license Fee $ 185 ,Templates training $ 150.</p>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </mat-card-content> -->
+        </mat-card>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 col-md-12">
+        <mat-card class="mb-25 tagus-card">
+            <mat-card-header class="border-bottom">
+                <h5 class="mb-0">Daily Analysis</h5>
+            </mat-card-header>
+            <!-- <mat-card-content>
+                <mat-accordion class="tagus-advance-expansion">
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                What does it take to be validated by Zimra?
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <p>Valid invoice that can be validated on Zimra Portal
+                            Valid credit note that can be validated on Zimra Portal
+                            Valid debits note that can be validated on Zimra Portal
+                            .</p>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                How long does it take to be validated?
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <p>The validation will depend on the completion of the criteria provided. As soon as all met criteria are provided and sample invoices submitted to Zimra, Zimra will provide the green light to go into production.</p>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                What does Zimra use for VAT Claims?
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <p>Only the production invoices are used for VAT claims. The client and service provider need to ensure they push the client to go into production.
+                            Kindly note that FDMS test invoices are strictly for testing purposes.
+                        </p>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                What happens after Zimra provides a green light into production?
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <p>Zimra will issue a new client with a production certificate. The Axis Solutions team will do an installation for the client.</p>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Which accounting software’s & operating system is compatible with the new Zimra system?
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <p>All accounting software systems with an exception on how flexible they are. Windows 10 0r 11 Professional and enterprise.</p>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Revmax device prices (for new device, reinstallation, and annual license fee)
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <p>New device $ 595 , Replacement $ 410 ,Reinstallation $ 60 ,Annual license Fee $ 185 ,Templates training $ 150.</p>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </mat-card-content> -->
+        </mat-card>
+    </div>
+
+   
+</div>
+
+
+</div>

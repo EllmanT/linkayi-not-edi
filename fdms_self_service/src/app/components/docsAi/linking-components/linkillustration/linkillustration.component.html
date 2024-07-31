@@ -1,0 +1,10 @@
+<div class="link-container">
+    <div *ngFor="let prop of objectAProperties" class="property-pair">
+        <input type="radio" [(ngModel)]="selectedPropertyA" [value]="prop" />
+        <label>{{ prop }}</label>
+        <span class="link-line"></span>
+        <input type="radio" [(ngModel)]="selectedPropertyB" [value]="prop" />
+    </div>
+
+    <button (click)="linkProperties()">Link</button>
+</div>

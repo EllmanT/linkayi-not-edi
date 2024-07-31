@@ -1,0 +1,86 @@
+<div
+    class="sidebar-area bg-white box-shadow"
+    [ngClass]="{'active': isToggled}"
+    [class.dark-sidebar]="!themeService.isSidebarDark()"
+    [class.right-sidebar]="themeService.isRightSidebar()"
+    [class.hide-sidebar]="themeService.isHideSidebar()"
+>
+<div class="logo bg-white">
+    <a routerLink="/administrator-dashboard" class="d-flex align-items-center">
+        <img src="assets/img/icon/logo-neat.ico" style="border-radius: 20%;" width="100" height="120" alt="logo" class="mr-2">
+        <span class="align-self-center">Linkayi</span>
+
+    </a>
+    
+</div>
+    <div class="burger-menu" (click)="toggle()" [ngClass]="{'active': isToggled}">
+        <span class="top-bar"></span>
+        <span class="middle-bar"></span>
+        <span class="bottom-bar"></span>
+    </div>
+    <ng-scrollbar visibility="hover" style="height: 100vh;">
+        <div class="sidebar-inner">
+            <div class="sidebar-menu">
+                <mat-accordion>
+<!--                    <span class="sub-title gray-color">MAIN</span>-->
+                    <a routerLink="/administrator-dashboard" class="sidebar-menu-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                        <i class="flaticon-menu-1"></i>
+                        <!-- <span class="title">Dashboard</span> -->
+                        <span class="title"> Dashboard</span>
+                    </a>
+
+                    <span class="sub-title gray-color">MAIN</span>
+
+                    <!-- <a routerLink="/ticket-checker-2000" class="sidebar-menu-link" routerLinkActive="active">
+                        <i class="ri-ticket-2-fill"></i>
+                        <span class="title">Check Ticket</span>
+                    </a>
+                    <a routerLink="/main-container" class="sidebar-menu-link" routerLinkActive="active">
+                        <i class="ri-money-dollar-circle-fill"></i>
+                        <span class="title">Fiscalisation</span>
+                    </a>
+                    <a routerLink="/help-desk" class="sidebar-menu-link" routerLinkActive="active">
+                        <i class="ri-user-2-fill"></i>
+                        <span class="title">Help Desk</span>
+                    </a> -->
+                    <a routerLink="/client-all-receipts" class="sidebar-menu-link" routerLinkActive="active">
+                        <i class="ri-file-warning-line"></i>
+                        <span class="title">View All </span>
+                    </a>
+                    <a routerLink="/pending-invoices" class="sidebar-menu-link" routerLinkActive="active">
+                        <i class="ri-file-warning-line"></i>
+                        <span class="title">Pending </span>
+                    </a>
+                    <a routerLink="/templates" class="sidebar-menu-link" routerLinkActive="active">
+                        <i class="ri-upload-cloud-2-fill"></i>
+                        <!-- <span class="title">Templates</span> -->
+                        <span class="title">Upload Invoices</span>
+                    </a>
+                    <a routerLink="/client-suppliers" class="sidebar-menu-link" routerLinkActive="active">
+                        <i class="ri-shake-hands-line"></i>
+                        <!-- <span class="title">Templates</span> -->
+                        <span class="title">My Suppliers</span>
+                    </a>
+                    <a routerLink="/client-buyers" class="sidebar-menu-link" routerLinkActive="active">
+                        <i class="ri-group-2-fill"></i>
+                        <!-- <span class="title">Templates</span> -->
+                        <span class="title">My Customers</span>
+                    </a>
+                  
+                    <!-- <a routerLink="/close-day" class="sidebar-menu-link" routerLinkActive="active">
+                        <i class="ri-close-fill"></i>
+                        <span class="title">Close Day</span>
+                    </a> -->
+                   
+
+                    <a routerLink="/client-details" class="sidebar-menu-link" routerLinkActive="active">
+                        <i class="ri-git-repository-private-line"></i>
+                        <span class="title">My Details</span>
+                    </a>
+
+
+                </mat-accordion>
+            </div>
+        </div>
+    </ng-scrollbar>
+</div>

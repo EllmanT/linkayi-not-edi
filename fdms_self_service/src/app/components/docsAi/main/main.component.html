@@ -1,0 +1,210 @@
+
+
+<mat-card class="mb-25 tagus-card">
+    <mat-card-header>
+        <h4>Templates</h4>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-horizontal-stepper>
+            <mat-step label="Documet Upload">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                        <mat-card class="mb-25 tagus-card">
+                            <mat-card-header>
+                                <h5 class="mb-0">Simple File Uploader</h5>
+                            </mat-card-header>
+                            <mat-card-content>
+                                <ngx-dropzone (change)="onFileSelected($event)">
+                                    <ngx-dropzone-label class="fw-semibold">Drop files here or click to upload.</ngx-dropzone-label>
+                                    <ngx-dropzone-preview *ngFor="let f of files" multiple="false" [removable]="true" (removed)="onRemove(f)">
+                                        <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                                    </ngx-dropzone-preview>
+                                </ngx-dropzone>
+                                <mat-progress-bar class="mt-10" mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                </div>
+                <div *ngIf="data">
+                    <mat-label><h4><i style="color: red">Please select a table with your invoice  line items before proceeding</i></h4></mat-label>
+                </div>
+                <mat-tab-group class="tagus ms-5 me-5 mt-20 mb-5">
+                    <mat-tab label="Tables">
+                        <!-- Content for Tab 2 -->
+
+                        <div *ngIf="data">
+                            <mat-radio-group [(ngModel)]="selectedTableIndex">
+                                <div class="mb-20" *ngFor="let table of data.tables; let i = index">
+                                    <mat-radio-button [value]="i" (click)="selectedTable(table)"><h4>line item table</h4> </mat-radio-button>
+                                    <app-tables [data]="table"></app-tables>
+                                    <br>
+                                </div>
+                            </mat-radio-group>
+                        </div>
+
+                    </mat-tab>
+                    <mat-tab label="Key Values">
+                        <!-- Content for Tab 1 -->
+                        <div *ngIf="data">
+                            <mat-card class="mb-25 tagus-card">
+                                <mat-card-header><h4>key value pairs</h4></mat-card-header>
+                                <mat-card-content>
+                                    <div *ngFor="let key of getObjectKeys(data.formFields)">
+                                        <p><i>{{ key }}</i> <strong>: {{ data.formFields[key] }}</strong></p>
+                                    </div>
+                                </mat-card-content>
+                            </mat-card>
+                        </div>
+                    </mat-tab>
+                    <mat-tab label="OCR">
+                        <!-- Content for Tab 3 -->
+                        <h4>Optical Character Recognition</h4>
+                        <div *ngIf="data">
+                            <p>{{data.ocr}}</p>
+                        </div>
+                    </mat-tab>
+                </mat-tab-group>
+                <button [disabled]="!selectedTableDetails" mat-flat-button matStepperNext class="tagus ms-5 mt-20">Next</button>
+
+            </mat-step>
+            <mat-step label="Map Fields">
+                <mat-card class="tagus-card">
+                    <mat-card-header>
+<!--                        <h4>Mappings</h4>-->
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div class="row">
+                            <div class="col-md-4 col-sm-4">
+                                <mat-card>
+                                    <mat-card-header><h4>key value pairs</h4></mat-card-header>
+                                    <mat-card-content>
+                                        <div *ngIf="data">
+                                            <div *ngFor="let key of getObjectKeys(data.formFields)">
+                                                <p><i>{{ key }}</i> <strong>: {{ data.formFields[key] }}</strong></p>
+                                            </div>
+                                        </div>
+                                        <h4 class="mt-20">Line items columns</h4>
+                                        <div class="row">
+                                            <div *ngIf="data && selectedTableDetails">
+                                                <div *ngFor="let key of getObjectKeys(selectedTableDetails[0])">
+                                                    <p><i>{{ key }}</i></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </mat-card-content>
+                                </mat-card>
+                            </div>
+                            <div class="col-md-4 col-sm-4">
+                                <mat-card>
+                                    <mat-card-header><h4>Zimra Key fieds mapping</h4></mat-card-header>
+                                    <mat-card-content *ngIf="data && selectedTableDetails">
+                                        <form [formGroup]="zimraForm">
+                                            <div *ngFor="let key of Object.keys(validationZimraFieldsObject)">
+                                                <ng-container *ngIf="key !== 'companyFields' && key !== 'customerFields' && key !== 'lineColumns'; else nestedFields">
+                                                    <label>{{ key }}</label>
+                                                    <input type="text" [formControlName]="key">
+                                                </ng-container>
+                                                <ng-template #nestedFields>
+                                                    <label><h4>{{key}}</h4></label>
+                                                    <div *ngFor="let subKey of Object.keys(getSubObject(validationZimraFieldsObject, key))">
+                                                        <label><strong>{{ subKey }}</strong></label>
+                                                        <div *ngIf="key !== 'lineColumns'">
+                                                            <div *ngIf="key === 'companyFields'">
+                                                                <label class="me-30">column name: <span style="color: #00acee">{{getSubObject(validationZimraFieldsObject.companyFields, subKey)}}</span></label>
+                                                                <select *ngIf="data.formFields" [formControlName]='subKey + "_companyFields"' (change)="updateZimraObj(validationZimraFieldsObject.companyFields, subKey, zimraForm.get(subKey + '_companyFields')?.value)">
+                                                                    <option *ngFor="let value of Object.keys(data.formFields)" [value]="value">{{ value }} : {{getSubObject(data.formFields, value)}}</option>
+                                                                </select>
+                                                            </div>
+                                                            <div *ngIf="key === 'customerFields'">
+                                                                <label class="me-30">column name: <span style="color: #00acee">{{getSubObject(validationZimraFieldsObject.customerFields, subKey)}}</span></label>
+                                                                <select *ngIf="data.formFields" [formControlName]='subKey + "_customerFields"' (change)="updateZimraObj(validationZimraFieldsObject.customerFields, subKey, zimraForm.get(subKey + '_customerFields')?.value)">
+                                                                    <option *ngFor="let value of Object.keys(data.formFields)" [value]="value">{{ value }} : {{getSubObject(data.formFields, value)}}</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div *ngIf="key === 'lineColumns'">
+                                                            <label class="me-30">column name: <span style="color: #00acee">{{getSubObject(validationZimraFieldsObject.lineColumns, subKey)}}</span></label>
+                                                            <select *ngIf="validationZimraFieldsObject.lineColumns" [formControlName]='subKey' (change)="updateZimraObj(validationZimraFieldsObject.lineColumns, subKey, zimraForm.get(subKey)?.value)">
+                                                                <option value="">select table field</option>
+                                                                <option *ngFor="let value of Object.keys(selectedTableDetails[0])" [value]="value" >{{ value }}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </ng-template>
+                                            </div>
+                                        </form>
+
+
+                                    </mat-card-content>
+                                </mat-card>
+                            </div>
+                            <div class="col-md-4 col-sm-4">
+                                <mat-card>
+                                    <mat-card-header><h4>Result</h4></mat-card-header>
+                                    <mat-card-content *ngIf="data && selectedTableDetails">
+                                        <div *ngIf="validationZimraFieldsObject">
+                                            <h3>IZimraFields Object</h3>
+                                            <ul>
+                                                <ng-container *ngFor="let property of getObjectProperties(validationZimraFieldsObject)">
+                                                    <li *ngIf="isObject(property.value)">
+                                                        <strong>{{ property.name }}:</strong>
+                                                        <ul>
+                                                            <ng-container *ngFor="let subProperty of getObjectProperties(property.value)">
+                                                                <li><strong>{{ subProperty.name }}:</strong> <i style="color: #00acee">{{ subProperty.value }}</i></li>
+                                                            </ng-container>
+                                                        </ul>
+                                                    </li>
+                                                    <li *ngIf="!isObject(property.value)"><strong>{{ property.name }}:</strong> <i style="color: #00acee">{{ property.value }}</i></li>
+                                                </ng-container>
+                                            </ul>
+                                        </div>
+                                    </mat-card-content>
+                                </mat-card>
+                            </div>
+
+                        </div>
+
+
+
+
+                    </mat-card-content>
+                </mat-card>
+            </mat-step>
+            <mat-step label="Result">
+                <!-- Content for Step 2 -->
+            </mat-step>
+            <mat-step label="Complete">
+                <!-- Content for Step 2 -->
+            </mat-step>
+        </mat-horizontal-stepper>
+
+    </mat-card-content>
+</mat-card>
+
+<!--<input type="file" (change)="onFileSelected($event)" />-->
+
+
+
+
+
+<!--<div *ngIf="data">-->
+<!--  <div class="mb-20" *ngFor="let table of data.tables">-->
+<!--    <mat-label><h2>Table</h2></mat-label>-->
+<!--    <app-tables [data]="table"></app-tables>-->
+<!--    <br>-->
+<!--  </div>-->
+<!--  <mat-card class="mb-25 tagus-card">-->
+<!--    <mat-card-header><h4>key value pairs</h4></mat-card-header>-->
+<!--    <mat-card-content>-->
+<!--      <div *ngFor="let key of getObjectKeys(data.formFields)">-->
+<!--        <p><i>{{ key }}</i> <strong>: {{ data.formFields[key] }}</strong></p>-->
+<!--      </div>-->
+<!--    </mat-card-content>-->
+<!--  </mat-card>-->
+<!--  <mat-card>-->
+<!--    <mat-card-header><h2>OCR Text</h2></mat-card-header>-->
+<!--    <mat-card-content>-->
+<!--        {{data.ocr}}-->
+<!--    </mat-card-content>-->
+<!--  </mat-card>-->
+<!--</div>-->

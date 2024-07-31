@@ -1,0 +1,151 @@
+<mat-card class="mb-25 tagus-card">
+  <mat-card-header>
+    <h4>Find Device ID</h4>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-horizontal-stepper #stepper [linear]="true">
+      <mat-step label="My Information ">
+        <div class="row">
+          <h5 class="mb-1 text-center">Locate your Device ID</h5>
+          <div class="col-lg-6 col-md-6">
+            <mat-card class="mb-25 tagus-card">
+              <mat-card-header>
+                <h5 class="mt-0">On Error Message</h5>
+              </mat-card-header>
+              <mat-card-content>
+                  <mat-card  class="single-stats-box tagus-card mb-25">
+                        <mat-card-content class="d-flex align-items-center justify-content-center">
+             
+                          <img src="assets/close-day/deviceid_error.png" alt="Download Image" style="width: 600px; height: 300px;">
+                        
+                      </mat-card-content>
+                        
+                   
+                  </mat-card>
+              </mat-card-content>
+            </mat-card>
+          </div>
+          <div class="col-lg-6 col-md-6">
+            <mat-card class="mb-25 tagus-card">
+              <mat-card-header>
+                <h5 class="mt-0">On Fiscalised Invoice </h5>
+              </mat-card-header>
+              <mat-card-content>
+                  <mat-card  class="single-stats-box tagus-card mb-25">
+                        <mat-card-content class="d-flex align-items-center justify-content-center">
+             
+                          <img src="assets/close-day/qr-deviceid.png" alt="Download Image" style="width: 300px; height: 300px;">
+                        
+                      </mat-card-content>
+                        
+                   
+                  </mat-card>
+              </mat-card-content>
+            </mat-card>
+          </div>
+
+          <!-- <button [disabled]="" mat-flat-button  class="tagus ms-5 mt-20" >Back</button> -->
+          <div class="text-center">
+            <button
+              mat-flat-button
+              matStepperNext
+              class="tagus ms-5 mt-20"
+              color="accent">
+              Next
+            </button>
+          </div>
+        </div>
+
+        <!--                <button [disabled]="!capturedFields.creditNote" mat-flat-button matStepperNext class="tagus ms-5 mt-20">Next</button>-->
+      </mat-step>
+
+      <mat-step label="Close Day Request">
+        <form [formGroup]="closeDayForm">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+              <div class="tagus-form-group">
+                <label class="d-block mb-12 fw-semibold gray-color"
+                  >Company Name</label
+                >
+                <mat-form-field appearance="fill">
+                  <i class="ri-user-3-line"></i>
+                  <mat-label>Company Name</mat-label>
+                  <input
+                    matInput
+                    formControlName="companyName"
+                    type="text"
+                    [disabled]="false" />
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <div class="tagus-form-group">
+                <label class="d-block mb-12 fw-semibold gray-color"
+                  >Device ID</label
+                >
+                <mat-form-field appearance="fill">
+                  <i class="ri-device-line"></i>
+                  <mat-label>Enter Device Id</mat-label>
+                  <input
+                    matInput
+                    formControlName="deviceId"
+                    type="number"
+                    [disabled]="false" />
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <div class="tagus-form-group">
+                <label class="d-block mb-12 fw-semibold gray-color"
+                  >Email</label
+                >
+                <mat-form-field appearance="fill">
+                  <i class="ri-mail-line"></i>
+                  <mat-label>Enter Email</mat-label>
+                  <input
+                    matInput
+                    formControlName="email"
+                    type="email"
+                    [disabled]="false" />
+                </mat-form-field>
+              </div>
+              
+            </div>
+          </div>
+          <mat-progress-bar class="mt-10" mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+
+        </form>
+
+        <div class="text-center">
+          <button mat-flat-button class="tagus ms-5 mt-20" matStepperPrevious color="primary">
+            Back
+          </button>
+          <button mat-flat-button class="tagus ms-5 mt-20" color="accent" [disabled]="loading" [class.loading]="loading"  (click)="onSubmit()">
+            <span *ngIf="loading">Submitting Request...</span>
+            <span *ngIf="!loading">Submit</span>
+          </button>
+        </div>
+        <!--                <button [disabled]="!capturedFields.creditNote" mat-flat-button matStepperNext class="tagus ms-5 mt-20">Next</button>-->
+      </mat-step>
+
+      <mat-step label=" ">
+          <div class="row">
+            <div class="text-center color-success">
+              <h2>Your request has been sent to ZIMRA successfully!</h2>
+                <p>Your day will be closed in the next 10 mins to 1 hour.</p>
+            </div>
+            
+          </div>
+
+        <div class="text-center">
+          <button mat-flat-button class="tagus ms-5 mt-20" matStepperPrevious color="primary">
+            Back
+          </button>
+         
+        </div>
+        <!--                <button [disabled]="!capturedFields.creditNote" mat-flat-button matStepperNext class="tagus ms-5 mt-20">Next</button>-->
+      </mat-step>
+    </mat-horizontal-stepper>
+    
+  </mat-card-content>
+</mat-card>

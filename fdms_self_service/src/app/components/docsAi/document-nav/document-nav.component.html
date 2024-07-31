@@ -1,0 +1,28 @@
+<nav>
+    <ul class="ps-0 mt-0">
+        <li>
+            <a  [queryParams]="{ data: data }"
+                routerLink="/key-value-pairs"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+            >Key Values</a
+            >
+        </li>
+        <li>
+            <a  [queryParams]="{ data: data }"
+                routerLink="/tables"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+            >Vehicle</a
+            >
+        </li>
+        <li>
+            <a  [queryParams]="{ data: data }"
+                routerLink="/vehicle-type"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+            >Vehicle Type</a
+            >
+        </li>
+    </ul>
+</nav>

@@ -1,0 +1,117 @@
+<ng-container [ngSwitch]="stepperOrientation | async">
+<!--    <div *ngSwitchCase="'horizontal'">Make your screen smaller to see a vertical stepper</div>-->
+<!--    <div *ngSwitchCase="'vertical'">Make your screen larger to see a horizontal stepper</div>-->
+</ng-container>
+
+<mat-stepper #stepper class="example-stepper" [orientation]="(stepperOrientation | async)!" [linear]="true">
+    <mat-step [stepControl]="firstFormGroup" label="Start" [completed] = "false" [editable]="false">
+        <form [formGroup]="firstFormGroup">
+            <mat-card class="mb-25 tagus-card mt-10">
+                <mat-card-content>
+<!--                    <span class="badge text-bg-tagus me-15">Tagus</span>-->
+<!--                    <span class="badge text-bg-primary">Primary</span>-->
+<!--                    <img src="assets/img/card1.jpg" class="border-radius mt-15" alt="card">-->
+                    <h3 class="mb-12 mt-15">Revmax status</h3>
+                    <p >If you are already registred click update to verify and update your details <br>
+                    If you are a new customer click register</p>
+                    <button mat-flat-button class="tagus" (click)="setUpdateStatus(stepper)">Update</button>
+                    <button mat-flat-button class="tagus text-bg-success ms-5"   (click)="registerButtonClicked(stepper)">Register</button>
+                </mat-card-content>
+            </mat-card>
+            <div>
+<!--                <button mat-flat-button class="tagus" matStepperNext>Next</button>-->
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="thirdFormGroup" label="BP / TIN Number" [completed]="false" [editable]="false">
+        <mat-card class="mb-25 tagus-card">
+            <mat-card-header>
+                <h5 class="mb-0">BP / TIN</h5>
+            </mat-card-header>
+            <mat-card-content>
+                <form class="tagus-search-box">
+                    <input type="text" class="input-search" #search placeholder="Enter your BP or TIN number">
+                    <button mat-flat-button class="tagus" (click)="getCompany(search.value)" [disabled]="!updateStatus || loading">
+                        <span class="d-flex" *ngIf="loading">Searching...<mat-spinner diameter="20"></mat-spinner></span>
+                        <span *ngIf="!loading">Search</span>
+                    </button>
+                </form>
+                <div class="row mt-20 mb-10 " >
+                    <mat-card class="mb-25 tagus-card" *ngIf="loading">
+                        <mat-card-content class="d-flex justify-content-center">
+                            <mat-spinner></mat-spinner>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+                <mat-card class="profile-card-box tagus-card mb-25 mt-20" *ngIf="companySuccess">
+                    <div class="d-md-flex align-items-center justify-content-space-between">
+                        <div class="profile-box">
+                            <img src="assets/img/office_building.png" height="60" width="60" class="rounded-circle mb-15" alt="user">
+                            <h5 class="fw-semibold">{{ company?.name }}</h5>
+                            <span class="d-block gray-color">BP: {{ company?.bpn }}</span>
+                        </div>
+                        <div class="impression-box text-center">
+
+<!--                            <button mat-flat-button class="tagus me-5 text-bg-danger">Incorrect</button>-->
+                            <button mat-flat-button class="tagus text-bg-success" (click)="setUpdateStatus(stepper)">Continue</button>
+                        </div>
+                    </div>
+                </mat-card>
+                <mat-card class="profile-card-box tagus-card mb-25 mt-20" *ngIf="companyFail">
+                    <div class="d-md-flex align-items-center justify-content-space-between">
+                        <div class="profile-box">
+                            <img src="assets/img/warning.png" height="60" width="60" class="rounded-circle mb-15" alt="user">
+                            <h5 class="fw-semibold">Company not found!</h5>
+                            <span class="d-block gray-color">BP: invalid / not registered</span>
+                        </div>
+                        <div class="impression-box text-center">
+
+                            <button mat-flat-button class="tagus text-bg-success" matStepperNext (click)="reg(stepper)">Register</button>
+                        </div>
+                    </div>
+                </mat-card>
+                <div class="mt-15">
+                    <button mat-flat-button class="tagus me-15" matStepperPrevious>Back</button>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup" label="Company Details" [completed]="false" [editable]="true">
+        <app-registration-form [companyData]="company" [updateStatus] = updateStatus #formRef></app-registration-form>
+        <div  class="mb-20">
+            <ng-template [ngIf]="companyAlreadyExists">
+                <div class="alert alert-warning" role="alert">
+                  <span>
+                    The company details entered are already associated with another registered company. Please update the existing record
+                  </span>
+                    <a routerLink="." class="alert-link updateButton" (click)="refresh()">Update</a>
+                </div>
+
+            </ng-template>
+<!--            <button mat-flat-button class="tagus me-15" matStepperPrevious>Back</button>-->
+            <button mat-flat-button class="tagus" [disabled]="!formRef.registrationForm.valid || loading" (click)="getFormData(formRef, stepper)">
+                <span class="d-flex" *ngIf="loading">Submitting...<mat-spinner diameter="20"></mat-spinner></span>
+                <span *ngIf="!loading">Submit</span>
+            </button>
+
+        </div>
+    </mat-step>
+    <mat-step [stepControl]="thirdFormGroup" label="Confirm Details" [completed]="false" [editable]="false">
+<!--        <app-display-company-details [companyData]="companyDetail"></app-display-company-details>-->
+        <div>
+            <button mat-flat-button class="tagus me-15" matStepperPrevious>Back</button>
+            <button mat-flat-button class="tagus" [disabled]="isLoading" (click)="onSubmit(stepper)">
+                <span class="d-flex" *ngIf="isLoading">Submitting...<mat-spinner diameter="20"></mat-spinner></span>
+                <span *ngIf="!isLoading">Submit</span>
+            </button>
+        </div>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+
+        <app-confirm-component></app-confirm-component>
+        <div>
+            <button mat-flat-button class="tagus" matStepperPrevious>Back</button>
+        </div>
+    </mat-step>
+</mat-stepper>

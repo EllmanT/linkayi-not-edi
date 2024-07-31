@@ -1,0 +1,21 @@
+<div class="row">
+    <div class="col-sm-6 col-md-6 col-lg-6">
+      <nav class="page-breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a routerLink="/dashboard">Dashboard</a></li>
+          <li class="breadcrumb-item active" aria-current="page"> My Supplier Invoices</li>
+        </ol>
+      </nav>
+    </div>
+    <div class="col-sm-6 col-md-6 col-lg-6 d-flex justify-content-end">
+      <button mat-raised-button class="col-2 me-2" color="primary" >Incoming trans   <b>5</b></button>
+
+      <button mat-raised-button class="col-2 me-2" color="accent" >Outgoing trans  <b>78</b></button>
+      <button mat-raised-button class="col-2 me-2" color="" (click)="addRole()">+ Banking Details</button>
+
+    </div>
+  </div>
+  <div class="row mt-3">
+    <app-data-table [data]="data" (actions)="handleAction($event)"></app-data-table>
+  </div>
+  

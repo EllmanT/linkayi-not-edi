@@ -1,0 +1,39 @@
+<mat-card class="mb-10 tagus-card">
+    <mat-card-header>
+<!--        <h4>Tables</h4>-->
+    </mat-card-header>
+    <mat-card-content>
+        <div>
+            <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                <!-- Dynamic Column Definition -->
+                <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
+                    <mat-header-cell *matHeaderCellDef>{{ column }}</mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{ element[column] }}</mat-cell>
+                </ng-container>
+
+                <!-- Header Row -->
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+                <!-- Data Rows -->
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+        </div>
+    </mat-card-content>
+</mat-card>
+
+
+<!--<mat-table [dataSource]="dataSource" class="mat-elevation-z8">-->
+
+<!--  &lt;!&ndash; Dynamic Column Definition &ndash;&gt;-->
+<!--  <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">-->
+<!--    <mat-header-cell *matHeaderCellDef>{{ column }}</mat-header-cell>-->
+<!--    <mat-cell *matCellDef="let element">{{ element[column] }}</mat-cell>-->
+<!--  </ng-container>-->
+
+<!--  &lt;!&ndash; Header Row &ndash;&gt;-->
+<!--  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>-->
+
+<!--  &lt;!&ndash; Data Rows &ndash;&gt;-->
+<!--  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>-->
+<!--</mat-table>-->

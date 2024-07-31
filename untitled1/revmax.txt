@@ -1,0 +1,40 @@
+                                                                                             Fiscal Tax Invoice
+
+
+                                                                                             Document number:              IN-000004873
+SKM Motorcycles (Pvt) Ltd                                                                    Date:                         5/3/2024
+100 Lytton Road                                                                              Page:                         1
+Workington, Harare, Zimbabwe                                                                 Reference:
+Phone +263-242-667828 / 0 / +263 779 604 023                                                 Required:                     12/3/2024
+VAT.No. 220070679                                                                            Account:                      002$$$
+TIN.No. 220318861
+
+
+                   Sold To:                                        Ship To:
+                   Cash Sale Counter - USD$$$                      Cash Sale Counter - USD$$$
+
+
+
+
+ Customer VAT:                                  Customer TIN NO:                                   Sales Person: Stan Whiting
+
+        Item                         Description               Price (Incl)   Discount            Qty          VAT Amount         Amount Incl.
+
+
+ 1991401-018000               Switch Gearshift SK150-GLC           5.00            0.00            1                0.65               5.00
+
+
+
+
+   SKM Motorcycles (Pvt) Ltd                                                                       Total Excl VAT:                        USD 4.35
+   Bank: Nedbank
+                                                                                                   Discount:                              USD 0.00
+   Branch: Southerton
+   RTGS Account Number: 61031009824                                                                 VAT:                                  USD 0.65
+   Nostro Account Number: 11990150070
+   ECOCASH - MERCHANT CODE : 88321                                                                     Invoice Total :                    USD 5.00
+
+
+
+                                                                                Powered by Palladium Software (Pty) Ltd® - ©2015 (www.palladium.co.za)
+
